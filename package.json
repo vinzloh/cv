@@ -11,5 +11,13 @@
     "next": "9.3.6",
     "react": "16.13.1",
     "react-dom": "16.13.1"
-  }
+  },
+  "devDependencies": {
+    "sass": "^1.26.5",
+    "tailwindcss": "^1.4.5"
+  },
+  "browserslist": [
+    "> .5%, last 2 versions",
+    "ie >= 9"
+  ]
 }
