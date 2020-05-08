@@ -1,0 +1,48 @@
+.companyLogo {
+  max-width: 70px;
+}
+
+.row {
+  display: grid;
+  grid-column-gap: 1rem;
+  grid-template-columns: auto 150px auto;
+
+  [data-company-logo] {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+  }
+  [data-company] {
+    grid-row: 1;
+    grid-column: 2;
+  }
+  [data-role] {
+    grid-row: 2;
+    grid-column: 2 / span auto-end;
+  }
+  [data-start-date] {
+    grid-row: 3;
+    grid-column: 2;
+  }
+  [data-end-date] {
+    grid-row: 3;
+    grid-column: 2;
+    width: 70px;
+    margin: 0 0 0 auto;
+  }
+  [data-description] {
+    grid-row: 4;
+    grid-column: 2 / span 2;
+    margin-top: 1rem;
+  }
+
+  [data-start-date],
+  [data-end-date] {
+    @apply text-xs;
+  }
+  [data-date-divider] {
+    grid-row: 3;
+    grid-column: 2;
+    text-align: center;
+    line-height: 1;
+  }
+}

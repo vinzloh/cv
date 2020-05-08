@@ -1,3 +1,13 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+.root-container {
+  @apply h-full mx-auto;
+}
