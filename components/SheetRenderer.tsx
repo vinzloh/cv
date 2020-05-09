@@ -25,7 +25,7 @@ export default function SheetRenderer() {
 
   // https://stackoverflow.com/a/33727897
   const baseUrl = `//docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=`;
-  const papaConfig = { download: true, header: true };
+  const papaConfig = { download: true, header: true, skipEmptyLines: true };
 
   const getConfig = (key: string) =>
     (find(config, { key }) || ({} as any)).value;
@@ -81,15 +81,15 @@ export default function SheetRenderer() {
         return (
           <React.Fragment key={key}>
             {component ? (
-              <section className={getStylesClassName(key, "container")}>
+              <section className={getStylesClassName(key, "_container")}>
                 {component.data.map((row, index) => (
                   <div
                     key={index}
-                    className={getStylesClassName(key, "row")}
-                    style={getStyles(key, "row") as CSSProperties}
+                    className={getStylesClassName(key, "_row")}
+                    style={getStyles(key, "_row") as CSSProperties}
                   >
                     {component.meta.fields
-                      .filter((field) => !field.includes("!"))
+                      .filter((field) => !field.includes("!") && !!row[field])
                       .map((field, i) => {
                         const item = row[field];
                         const allowHTML = ["img", "a"];
