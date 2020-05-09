@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ["./**/*.tsx"],
+  purge: false,
   variants: {
     margin: ["last"],
   },
