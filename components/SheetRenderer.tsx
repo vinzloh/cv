@@ -2,6 +2,7 @@ import LoadingSpinner from "components/LoadingSpinner";
 import find from "lodash/find";
 import Papa from "papaparse";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React, { useEffect, useState, CSSProperties } from "react";
 
 interface GoogleSheet {
@@ -13,37 +14,43 @@ interface Hash<T = {}> {
   [key: string]: T;
 }
 
-export default function Resume() {
+export default function SheetRenderer() {
   const [config, setConfig] = useState([]);
   const [stylesheets, setStylesheets] = useState<Hash>({});
   const [componentsHash, setComponentsHash] = useState<Hash>({});
   const [componentsLayout, setComponentsLayout] = useState([]);
 
-  const baseUrl =
-    "https://docs.google.com/spreadsheets/d/1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ73eM/gviz/tq?tqx=out:csv&sheet=";
+  const { query } = useRouter();
+  const id = query.id || "1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ73eM";
 
-  const papaConfig = {
-    download: true,
-    header: true,
-  };
+  // https://stackoverflow.com/a/33727897
+  const baseUrl = `//docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=`;
+  const papaConfig = { download: true, header: true };
 
   const getConfig = (key: string) =>
     (find(config, { key }) || ({} as any)).value;
 
+  const stripHTML = (d: string) => d.replace(/(<([^>]+)>)/gi, "");
+
+  const getStyles = (key: string, field: string) =>
+    find(stylesheets[key] as [], { key: field });
+
+  const getStylesClassName = (key: string, field: string) =>
+    (getStyles(key, field) || ({} as any)).className;
+
   useEffect(() => {
-    Papa.parse(baseUrl + "config", {
+    Papa.parse(baseUrl + "_config", {
       ...papaConfig,
       complete: (results: any) => setConfig(results.data),
     });
-  }, []);
+  }, [baseUrl]);
 
   useEffect(() => {
-    // https://stackoverflow.com/a/33727897
-    Papa.parse(baseUrl + "layout", {
+    Papa.parse(baseUrl + "_layout", {
       ...papaConfig,
       complete: (results: any) => setComponentsLayout(results.data),
     });
-  }, []);
+  }, [baseUrl]);
 
   useEffect(() => {
     componentsLayout.forEach((row: any) => {
@@ -54,26 +61,18 @@ export default function Resume() {
           setComponentsHash((prev) => ({ ...prev, [component]: results })),
       });
 
-      Papa.parse(baseUrl + `${component}Styles`, {
+      Papa.parse(baseUrl + `${component}.css`, {
         ...papaConfig,
         complete: (results: any) =>
           setStylesheets((prev) => ({ ...prev, [component]: results.data })),
       });
     });
-  }, [componentsLayout]);
-
-  const stripHTML = (d: string) => d.replace(/(<([^>]+)>)/gi, "");
-
-  const getStyles = (key: string, field: string) =>
-    find(stylesheets[key] as [], { key: field });
-
-  const getStylesClassName = (key: string, field: string) =>
-    (getStyles(key, field) || ({} as any)).className;
+  }, [baseUrl, componentsLayout]);
 
   return (
     <>
       <Head>
-        <title>{getConfig("title") || ":)"}</title>
+        <title>{getConfig("title") || "O_o"}</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
