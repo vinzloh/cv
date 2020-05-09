@@ -9,3 +9,7 @@ export default function Home() {
     </div>
   );
 }
+
+export async function getServerSideProps(context: any) {
+  return { props: { id: context.query.id } };
+}
