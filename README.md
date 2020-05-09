@@ -32,7 +32,8 @@ Demo: https://makeithappen.now.sh/?id=1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ73
 
 `1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ73eM` is the Google Sheet ID
 
-Feel free to leave me any comment what you liked, what could be better, fork it and make it your own :)
+Feel free to leave comments on what you liked, what could be better, fork it and make it your own :)
+https://twitter.com/vinzloh
 
 #### Built with  Next.js + Tailwind + TypeScript + PapaParse :fire:
 
