@@ -1,9 +1,9 @@
 import LoadingSpinner from "components/LoadingSpinner";
 import find from "lodash/find";
-import Papa from "papaparse";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect, useState, CSSProperties } from "react";
+import Papa from "papaparse";
+import React, { CSSProperties, useEffect, useState } from "react";
 
 interface GoogleSheet {
   meta: { fields: string[] };
