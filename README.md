@@ -1,3 +1,13 @@
+Built with  Next.js + Tailwind + TypeScript + PapaParse
+
+### Example
+
+Sample Google Sheet ID: 1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ73eM
+
+Demo: https://makeithappen.now.sh/?id=1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ73eM
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -12,7 +22,6 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
 ## Learn More
 
