@@ -1,36 +1,19 @@
 import LoadingSpinner from "components/LoadingSpinner";
+import { getArrayValue, stripHTML, papaConfig } from "helpers";
 import find from "lodash/find";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Papa from "papaparse";
 import React, { CSSProperties, useEffect, useState } from "react";
+import { Hash, GoogleSheet } from "definitions";
+import useSheet from "hooks/useSheet";
+import useBaseUrl from "hooks/useBaseUrl";
 
-interface GoogleSheet {
-  meta: { fields: string[] };
-  data: any[];
-}
-
-interface Hash<T = {}> {
-  [key: string]: T;
-}
-
-export default function SheetRenderer() {
-  const [config, setConfig] = useState([]);
+export default function SheetRenderer({ id }: any) {
   const [stylesheets, setStylesheets] = useState<Hash>({});
   const [componentsHash, setComponentsHash] = useState<Hash>({});
   const [componentsLayout, setComponentsLayout] = useState([]);
 
-  const { query } = useRouter();
-  const id = query.id || "1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ73eM";
-
-  // https://stackoverflow.com/a/33727897
-  const baseUrl = `//docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=`;
-  const papaConfig = { download: true, header: true, skipEmptyLines: true };
-
-  const getConfig = (key: string) =>
-    (find(config, { key }) || ({} as any)).value;
-
-  const stripHTML = (d: string) => d.replace(/(<([^>]+)>)/gi, "");
+  const baseUrl = useBaseUrl(id);
 
   const getStyles = (key: string, field: string) =>
     find(stylesheets[key] as [], { key: field });
@@ -38,12 +21,7 @@ export default function SheetRenderer() {
   const getStylesClassName = (key: string, field: string) =>
     (getStyles(key, field) || ({} as any)).className;
 
-  useEffect(() => {
-    Papa.parse(baseUrl + "_config", {
-      ...papaConfig,
-      complete: (results: any) => setConfig(results.data),
-    });
-  }, [baseUrl]);
+  const config = useSheet("_config").data as [];
 
   useEffect(() => {
     Papa.parse(baseUrl + "_layout", {
@@ -72,7 +50,7 @@ export default function SheetRenderer() {
   return (
     <>
       <Head>
-        <title>{getConfig("title") || "O_o"}</title>
+        <title>{getArrayValue(config, "title") || "O_o"}</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
@@ -91,7 +69,7 @@ export default function SheetRenderer() {
                     {component.meta.fields
                       .filter((field) => !field.includes("!") && !!row[field])
                       .map((field, i) => {
-                        const item = row[field];
+                        const item = `${row[field]}`;
                         const allowHTML = ["img", "a"];
                         const fieldMatch: any = field.match(/<([a-z]+)>/);
                         const hasHTML =
