@@ -4,7 +4,7 @@ import useBaseUrl from 'hooks/useBaseUrl'
 import Papa from 'papaparse'
 import { useEffect, useState } from 'react'
 
-export default function useSheet(name: string): Hash {
+export default function useSheet(name: string = ''): Hash {
   const [sheet, setSheet] = useState({})
   const baseUrl = useBaseUrl()
   useEffect(() => {

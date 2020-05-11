@@ -30,3 +30,5 @@ export const tryEval = (template = () => {}) => {
     return error.toString()
   }
 }
+
+export const hasKeys = (o: any) => Object.keys(o || {}).length > 0

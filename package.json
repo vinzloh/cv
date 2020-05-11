@@ -11,6 +11,8 @@
     "precommit": "yarn lint-eslint && lint-staged"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "isomorphic-unfetch": "^3.0.0",
     "lodash": "^4.17.15",
     "next": "9.3.6",
     "papaparse": "^5.2.0",
@@ -18,6 +20,7 @@
     "react-dom": "16.13.1"
   },
   "devDependencies": {
+    "@types/cheerio": "^0.22.18",
     "@types/lodash": "^4.14.150",
     "@types/node": "^13.13.5",
     "@types/papaparse": "^5.0.3",
