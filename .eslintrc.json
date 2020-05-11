@@ -2,9 +2,15 @@
   "parser": "babel-eslint",
   "plugins": ["react", "react-hooks"],
   "rules": {
+    "react/jsx-uses-vars": "warn",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
     "react/react-in-jsx-scope": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
   "overrides": [
     {
