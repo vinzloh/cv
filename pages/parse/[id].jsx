@@ -48,6 +48,10 @@ export default function Parse() {
   return <pre>{JSON.stringify(data, null, 2)} </pre>
 }
 
-export async function getServerSideProps(context) {
-  return { props: { id: context.query.id } }
+export async function getStaticProps({ params }) {
+  return { props: { id: params.id } }
+}
+
+export async function getStaticPaths() {
+  return { paths: [], fallback: true }
 }
