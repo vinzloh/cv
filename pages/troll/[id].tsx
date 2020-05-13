@@ -32,6 +32,7 @@ export default function Troll() {
 
   useEffect(() => {
     if (!tasks && !transforms) return
+
     console.group(`tasks ${tasksUrl}`)
     console.table(tasks)
     console.groupEnd()
