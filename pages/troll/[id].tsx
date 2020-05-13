@@ -53,15 +53,24 @@ export default function Troll() {
   }, [tasks, tasksUrl, config, transforms])
 
   return (
-    <div>
-      <ul>
-        {results.map((result: any, index) => (
-          <li key={index}>
-            <pre>{JSON.stringify(result, null, 2)}</pre>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div>
+        <ul>
+          {results.map((result: any, index) => (
+            <li key={index}>
+              <pre>{JSON.stringify(result, null, 2)}</pre>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <style jsx>
+        {`
+          pre {
+            white-space: pre-line;
+          }
+        `}
+      </style>
+    </>
   )
 }
 
