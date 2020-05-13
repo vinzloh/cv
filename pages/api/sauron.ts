@@ -18,6 +18,7 @@ const trolling = async (req: any) => {
           error: 'Missing trolls',
         }
       : trolls
+          .filter(({ prop }: any) => !prop.includes('!'))
           .map(({ prop, selector, transform }: any) => [
             prop,
             tryParseJSON(
