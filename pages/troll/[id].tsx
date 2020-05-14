@@ -53,10 +53,6 @@ export default function Troll() {
     if (tasks.length === 0 || sheets.length > 0) return
     if (tasks.some((task) => !transformsHash[task.transforms])) return
 
-    console.group(`tasks`)
-    console.table(tasks)
-    console.groupEnd()
-
     tasks.forEach((task: Task, index) =>
       fetch(`/api/sauron`, {
         method: 'POST',

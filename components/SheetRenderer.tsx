@@ -25,11 +25,16 @@ export default function SheetRenderer(props: any) {
 
   useEffect(() => {
     if (!config) return
-    Papa.parse(baseUrl + `${layout || getArrayValue(config, 'page')}.layout`, {
-      ...papaConfig,
-      complete: (results: any) => setComponentsLayout(results.data),
-    })
-  }, [baseUrl, config, layout])
+    if (layout) {
+      Papa.parse(baseUrl + `${layout}.layout`, {
+        ...papaConfig,
+        complete: (results: any) => setComponentsLayout(results.data),
+      })
+    } else {
+      const [defaultComponent] = Object.keys(sheet)
+      setComponentsLayout([{ component: defaultComponent }] as any)
+    }
+  }, [baseUrl, config, layout, sheet])
 
   useEffect(() => {
     componentsLayout.forEach((row: any) => {
