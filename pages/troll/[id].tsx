@@ -1,3 +1,4 @@
+import SheetRenderer from 'components/SheetRenderer'
 import { Hash } from 'definitions'
 import { getArrayValue } from 'helpers'
 import useSheet from 'hooks/useSheet'
@@ -55,22 +56,9 @@ export default function Troll() {
 
   return (
     <>
-      <div>
-        <ul>
-          {results.map((result: any, index) => (
-            <li key={index}>
-              <pre>{JSON.stringify(result, null, 2)}</pre>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <style jsx>
-        {`
-          pre {
-            white-space: pre-line;
-          }
-        `}
-      </style>
+      {results.map((result, i) => (
+        <SheetRenderer key={i} layout={result} />
+      ))}
     </>
   )
 }
