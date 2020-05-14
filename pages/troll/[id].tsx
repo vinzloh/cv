@@ -3,7 +3,7 @@ import { Hash } from 'definitions'
 import { getArrayValue, hasKeys } from 'helpers'
 import useSheet from 'hooks/useSheet'
 import fetch from 'isomorphic-unfetch'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import LoadingSpinner from 'components/LoadingSpinner'
 
 interface Task {
@@ -57,29 +57,41 @@ export default function Troll() {
     console.table(tasks)
     console.groupEnd()
 
-    Promise.all(
-      tasks.map((task: Task) =>
-        fetch(`/api/sauron`, {
-          method: 'POST',
-          body: JSON.stringify({
-            url: task.url,
-            trolls: transformsHash[task.transforms as any],
-          }),
-        }).then((r) => r.json())
-      )
-    ).then(setSheets)
+    tasks.forEach((task: Task, index) =>
+      fetch(`/api/sauron`, {
+        method: 'POST',
+        body: JSON.stringify({
+          url: task.url,
+          trolls: transformsHash[task.transforms as any],
+        }),
+      })
+        .then((r) => r.json())
+        .then((sheet) =>
+          setSheets((prev) => {
+            const newSheets = [...prev]
+            newSheets[index] = sheet
+            return newSheets
+          })
+        )
+    )
   }, [tasks, sheets, tasksUrl, config, transformsHash])
 
   return (
-    <>
+    <section data-page className={getArrayValue(config, 'className')}>
       {sheets.length === 0 ? (
         <LoadingSpinner />
       ) : (
         sheets.map((sheet, i) => (
-          <SheetRenderer key={i} sheet={sheet} layout={tasks[i].layout} />
+          <Fragment key={i}>
+            {sheet ? (
+              <SheetRenderer sheet={sheet} layout={tasks[i].layout} />
+            ) : (
+              <LoadingSpinner />
+            )}
+          </Fragment>
         ))
       )}
-    </>
+    </section>
   )
 }
 
