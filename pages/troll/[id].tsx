@@ -9,6 +9,7 @@ import LoadingSpinner from 'components/LoadingSpinner'
 interface Task {
   url: string
   transforms: string
+  layout: string
 }
 
 export default function Troll() {
