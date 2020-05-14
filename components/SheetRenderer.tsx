@@ -6,13 +6,14 @@ import useSheet from 'hooks/useSheet'
 import find from 'lodash/find'
 import Head from 'next/head'
 import Papa from 'papaparse'
-import React, { CSSProperties, useEffect, useState } from 'react'
+import React, { CSSProperties, useEffect, useState, useMemo } from 'react'
 
-export default function SheetRenderer({ id }: any) {
+export default function SheetRenderer(props: any) {
+  const { id } = props
+  const layout = useMemo(() => props.layout || {}, [props])
   const [stylesheets, setStylesheets] = useState<Hash>({})
   const [componentsHash, setComponentsHash] = useState<Hash>({})
   const [componentsLayout, setComponentsLayout] = useState([])
-
   const baseUrl = useBaseUrl(id)
 
   const getStyles = (key: string, field: string) =>
@@ -33,11 +34,22 @@ export default function SheetRenderer({ id }: any) {
   useEffect(() => {
     componentsLayout.forEach((row: any) => {
       const component = row.component
-      Papa.parse(baseUrl + component, {
-        ...papaConfig,
-        complete: (results: GoogleSheet) =>
-          setComponentsHash((prev) => ({ ...prev, [component]: results })),
-      })
+      const data = layout[component] as any[]
+      if (data?.length > 0) {
+        setComponentsHash((prev) => ({
+          ...prev,
+          [component]: {
+            meta: { fields: Object.keys(data[0]) },
+            data,
+          } as GoogleSheet,
+        }))
+      } else {
+        Papa.parse(baseUrl + component, {
+          ...papaConfig,
+          complete: (results: GoogleSheet) =>
+            setComponentsHash((prev) => ({ ...prev, [component]: results })),
+        })
+      }
 
       Papa.parse(baseUrl + `${component}.css`, {
         ...papaConfig,
@@ -45,7 +57,7 @@ export default function SheetRenderer({ id }: any) {
           setStylesheets((prev) => ({ ...prev, [component]: results.data })),
       })
     })
-  }, [baseUrl, componentsLayout])
+  }, [baseUrl, componentsLayout, layout])
 
   return (
     <>
