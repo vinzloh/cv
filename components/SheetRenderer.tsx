@@ -25,11 +25,13 @@ export default function SheetRenderer(props: any) {
   const config = useSheet('_config').data as []
 
   useEffect(() => {
-    Papa.parse(baseUrl + '_layout', {
+    if (!config) return
+    const page = getArrayValue(config, 'page')
+    Papa.parse(baseUrl + `${page}.layout`, {
       ...papaConfig,
       complete: (results: any) => setComponentsLayout(results.data),
     })
-  }, [baseUrl])
+  }, [baseUrl, config])
 
   useEffect(() => {
     componentsLayout.forEach((row: any) => {

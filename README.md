@@ -12,8 +12,8 @@ https://docs.google.com/spreadsheets/d/1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ7
 ### How it works
 
 - first row of each sheet is the header.
-- `_config` is a special sheet. the page title on the browser tab is the `value` of the `key` cell, `title`
-- `_layout` is a special sheet. renders the page by rows, top to bottom from the `component` column. skips first row header
+- `_config` is a special sheet. the page title on the browser tab is `_config.title`
+- if `_config.page` is `main` it looks for the sheet named `main.layout`. renders the page by rows, top to bottom from the `component` column. skips first row header
 - `component` of `nav, roles, footer` match actual sheet names, holding data. **remove them all and create your own :)**
   - for example, add a new row of `intro` in `_layout`, add new sheet `intro` for data and `intro.css` for styles
 - back to `nav` sheet, rows are rendered top to bottom. skips first row header
