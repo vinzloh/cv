@@ -4,6 +4,7 @@ import { getArrayValue, hasKeys } from 'helpers'
 import useSheet from 'hooks/useSheet'
 import fetch from 'isomorphic-unfetch'
 import { useEffect, useState } from 'react'
+import LoadingSpinner from 'components/LoadingSpinner'
 
 interface Task {
   url: string
@@ -70,9 +71,11 @@ export default function Troll() {
 
   return (
     <>
-      {results.map((result, i) => (
-        <SheetRenderer key={i} layout={result} />
-      ))}
+      {results.length === 0 ? (
+        <LoadingSpinner />
+      ) : (
+        results.map((result, i) => <SheetRenderer key={i} layout={result} />)
+      )}
     </>
   )
 }
