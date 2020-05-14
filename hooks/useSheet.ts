@@ -8,7 +8,7 @@ export default function useSheet(name: string = ''): Hash {
   const [sheet, setSheet] = useState({})
   const baseUrl = useBaseUrl()
   useEffect(() => {
-    if (name.length === 0) return
+    if (name.length === 0) return setSheet({})
     let isMounted = true
     Papa.parse(baseUrl + name, {
       ...papaConfig,
