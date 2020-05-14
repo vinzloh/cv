@@ -71,7 +71,7 @@ export default function Troll() {
   }, [tasks, sheets, tasksUrl, config, transformsHash])
 
   return (
-    <>
+    <section data-page className={getArrayValue(config, 'className')}>
       {sheets.length === 0 ? (
         <LoadingSpinner />
       ) : (
@@ -79,7 +79,7 @@ export default function Troll() {
           <SheetRenderer key={i} sheet={sheet} layout={tasks[i].layout} />
         ))
       )}
-    </>
+    </section>
   )
 }
 
