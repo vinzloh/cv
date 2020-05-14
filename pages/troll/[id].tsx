@@ -46,10 +46,10 @@ export default function Troll() {
     )
   }, [transforms, transformUrl, setTransformUrl, transformsHash])
 
-  const [results, setResults] = useState<any[]>([])
+  const [sheets, setSheets] = useState<any[]>([])
 
   useEffect(() => {
-    if (tasks.length === 0 || results.length > 0) return
+    if (tasks.length === 0 || sheets.length > 0) return
     if (tasks.some((task) => !transformsHash[task.transforms])) return
 
     console.group(`tasks`)
@@ -66,15 +66,17 @@ export default function Troll() {
           }),
         }).then((r) => r.json())
       )
-    ).then(setResults)
-  }, [tasks, results, tasksUrl, config, transformsHash])
+    ).then(setSheets)
+  }, [tasks, sheets, tasksUrl, config, transformsHash])
 
   return (
     <>
-      {results.length === 0 ? (
+      {sheets.length === 0 ? (
         <LoadingSpinner />
       ) : (
-        results.map((result, i) => <SheetRenderer key={i} layout={result} />)
+        sheets.map((sheet, i) => (
+          <SheetRenderer key={i} sheet={sheet} layout={tasks[i].layout} />
+        ))
       )}
     </>
   )

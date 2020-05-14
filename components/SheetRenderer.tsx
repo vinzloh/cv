@@ -6,11 +6,10 @@ import useSheet from 'hooks/useSheet'
 import find from 'lodash/find'
 import Head from 'next/head'
 import Papa from 'papaparse'
-import React, { CSSProperties, useEffect, useState, useMemo } from 'react'
+import React, { CSSProperties, useEffect, useState } from 'react'
 
 export default function SheetRenderer(props: any) {
-  const { id } = props
-  const layout = useMemo(() => props.layout || {}, [props])
+  const { id, layout, sheet } = props
   const [stylesheets, setStylesheets] = useState<Hash>({})
   const [componentsHash, setComponentsHash] = useState<Hash>({})
   const [componentsLayout, setComponentsLayout] = useState([])
@@ -26,40 +25,39 @@ export default function SheetRenderer(props: any) {
 
   useEffect(() => {
     if (!config) return
-    const page = getArrayValue(config, 'page')
-    Papa.parse(baseUrl + `${page}.layout`, {
+    Papa.parse(baseUrl + `${layout || getArrayValue(config, 'page')}.layout`, {
       ...papaConfig,
       complete: (results: any) => setComponentsLayout(results.data),
     })
-  }, [baseUrl, config])
+  }, [baseUrl, config, layout])
 
   useEffect(() => {
     componentsLayout.forEach((row: any) => {
-      const component = row.component
-      const data = layout[component] as any[]
+      const sheetName = row.component
+      const data = sheet?.[sheetName] as any[]
       if (data?.length > 0) {
         setComponentsHash((prev) => ({
           ...prev,
-          [component]: {
+          [sheetName]: {
             meta: { fields: Object.keys(data[0]) },
             data,
           } as GoogleSheet,
         }))
       } else {
-        Papa.parse(baseUrl + component, {
+        Papa.parse(baseUrl + sheetName, {
           ...papaConfig,
           complete: (results: GoogleSheet) =>
-            setComponentsHash((prev) => ({ ...prev, [component]: results })),
+            setComponentsHash((prev) => ({ ...prev, [sheetName]: results })),
         })
       }
 
-      Papa.parse(baseUrl + `${component}.css`, {
+      Papa.parse(baseUrl + `${sheetName}.css`, {
         ...papaConfig,
         complete: (results: any) =>
-          setStylesheets((prev) => ({ ...prev, [component]: results.data })),
+          setStylesheets((prev) => ({ ...prev, [sheetName]: results.data })),
       })
     })
-  }, [baseUrl, componentsLayout, layout])
+  }, [baseUrl, componentsLayout, sheet])
 
   return (
     <>
