@@ -9,8 +9,9 @@ export default async (req: any, res: any) => {
 const trolling = async (req: any) => {
   try {
     const { url, trolls = [] } = JSON.parse(req.body)
-    const body = await fetch(url)
-    const page = $.load((await body.text()) as any)
+    const body = await (await fetch(url)).text()
+    const page = $.load(body as any, { xmlMode: body.includes('<?xml') })
+
     return trolls.length === 0
       ? {
           status: false,
