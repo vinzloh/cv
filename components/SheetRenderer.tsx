@@ -1,6 +1,6 @@
 import LoadingSpinner from 'components/LoadingSpinner'
 import { GoogleSheet, Hash } from 'definitions'
-import { getArrayValue, papaConfig, stripHTML } from 'helpers'
+import { findValue, papaConfig, stripHTML } from 'helpers'
 import useBaseUrl from 'hooks/useBaseUrl'
 import useSheet from 'hooks/useSheet'
 import find from 'lodash/find'
@@ -29,7 +29,7 @@ export default function SheetRenderer(props: any) {
       const [defaultComponent] = Object.keys(sheet)
       setComponentsLayout([{ component: defaultComponent }] as any)
     } else {
-      const page = layout || getArrayValue(config, 'page')
+      const page = layout || findValue(config, 'page')
       Papa.parse(baseUrl + `${page}.layout`, {
         ...papaConfig,
         complete: (results: any) => setComponentsLayout(results.data),
@@ -68,7 +68,7 @@ export default function SheetRenderer(props: any) {
   return (
     <>
       <Head>
-        <title>{getArrayValue(config, 'title') || 'O_o'}</title>
+        <title>{findValue(config, 'title') || 'O_o'}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

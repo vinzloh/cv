@@ -1,10 +1,7 @@
 import find from 'lodash/find'
 
-export const getArrayValue = (array: [], key: string) =>
+export const findValue = (array: [], key: string) =>
   (find(array, { key }) || ({} as any)).value
-
-export const getArrayValues = (array: [], keys: string[]) =>
-  keys.map((key) => getArrayValue(array, key))
 
 export const stripHTML = (d: string) => (d || '').replace(/(<([^>]+)>)/gi, '')
 
