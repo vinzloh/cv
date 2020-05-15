@@ -25,14 +25,15 @@ export default function SheetRenderer(props: any) {
 
   useEffect(() => {
     if (!config) return
-    if (layout) {
-      Papa.parse(baseUrl + `${layout}.layout`, {
+    if (sheet && !layout) {
+      const [defaultComponent] = Object.keys(sheet)
+      setComponentsLayout([{ component: defaultComponent }] as any)
+    } else {
+      const page = layout || getArrayValue(config, 'page')
+      Papa.parse(baseUrl + `${page}.layout`, {
         ...papaConfig,
         complete: (results: any) => setComponentsLayout(results.data),
       })
-    } else {
-      const [defaultComponent] = Object.keys(sheet)
-      setComponentsLayout([{ component: defaultComponent }] as any)
     }
   }, [baseUrl, config, layout, sheet])
 
