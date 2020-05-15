@@ -1,6 +1,5 @@
 import $ from 'cheerio'
 import template from 'lodash/template'
-import fetch from 'isomorphic-unfetch'
 import { tryParseJSON, tryEval } from 'helpers'
 
 export default async (req: any, res: any) => {

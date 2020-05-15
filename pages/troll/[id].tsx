@@ -2,7 +2,6 @@ import SheetRenderer from 'components/SheetRenderer'
 import { Hash } from 'definitions'
 import { getArrayValue, hasKeys } from 'helpers'
 import useSheet from 'hooks/useSheet'
-import fetch from 'isomorphic-unfetch'
 import { Fragment, useEffect, useState } from 'react'
 import LoadingSpinner from 'components/LoadingSpinner'
 
