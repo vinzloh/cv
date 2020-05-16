@@ -15,7 +15,7 @@ https://docs.google.com/spreadsheets/d/1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ7
 - `_config` is a special sheet. the page title on the browser tab is `_config.title`
 - if `_config.page` is `main` it looks for the sheet named `main.layout`. renders the page by rows, top to bottom from the `component` column. skips first row header
 - `component` of `nav, roles, footer` match actual sheet names, holding data. **remove them all and create your own :)**
-  - for example, add a new row of `intro` in `_layout`, add new sheet `intro` for data and `intro.css` for styles
+  - for example, change `_config.page` to `intro`, it will look for sheet `intro.layout` (add it) for layout and under `components` column add `intro` so it looks for `intro` sheet (add it) for data and `intro.css` (add it) for styles. 
 - back to `nav` sheet, rows are rendered top to bottom. skips first row header
 - `nav` data sheet matches style sheet `nav.css`:
   - `_container` and `_row` are reserved `key`column values. `_container` wraps `_row`s.
