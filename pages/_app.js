@@ -6,10 +6,11 @@ export function reportWebVitals(metric) {
   console.log(metric)
 }
 
-export default ({ Component, pageProps }) => (
+const App = ({ Component, pageProps }) => (
   <div className="container h-full mx-auto flex">
     <main className="flex flex-col m-auto justify-center items-center">
       <Component {...pageProps} />
     </main>
   </div>
 )
+export default App

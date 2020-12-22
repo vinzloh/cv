@@ -13,7 +13,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "lodash": "^4.17.19",
-    "next": "^9.4.0",
+    "next": "^10.0.3",
     "papaparse": "^5.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1"
