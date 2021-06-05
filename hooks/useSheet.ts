@@ -4,9 +4,12 @@ import useBaseUrl, { getBaseUrl } from 'hooks/useBaseUrl'
 import Papa from 'papaparse'
 import { useEffect, useState } from 'react'
 
-export const getSheet = (id: string, name: string): Promise<GoogleSheet> =>
-  new Promise((resolve) =>
-    Papa.parse(getBaseUrl(id) + name, { ...papaConfig, complete: resolve })
+export const getSheet = (id: string, name: string) =>
+  new Promise<GoogleSheet>((resolve) =>
+    Papa.parse<GoogleSheet>(getBaseUrl(id) + name, {
+      ...papaConfig,
+      complete: (res: any) => resolve(res),
+    })
   )
 
 export default function useSheet(name: string = ''): Hash {
