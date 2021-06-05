@@ -52,7 +52,7 @@ export default function SheetRenderer(props: any) {
       } else {
         Papa.parse(baseUrl + sheetName, {
           ...papaConfig,
-          complete: (results: GoogleSheet) =>
+          complete: (results) =>
             setComponentsHash((prev) => ({ ...prev, [sheetName]: results })),
         })
       }
