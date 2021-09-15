@@ -93,7 +93,8 @@ export default function SheetRenderer(props: any) {
                         const hasHTML =
                           fieldMatch && allowHTML.includes(fieldMatch[1])
                         const isImage =
-                          fieldMatch?.[1] === 'img' && item.includes('://')
+                          fieldMatch?.[1] === 'img' &&
+                          (item.includes('://') || item.includes('base64'))
                         const isLink =
                           fieldMatch?.[1] === 'a' && item.includes('://')
                         const isMultiLine = item.includes('\n\n')

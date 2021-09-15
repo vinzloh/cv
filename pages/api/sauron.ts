@@ -33,7 +33,7 @@ const trolling = async (req: any) => {
             (acc: any, [prop, value]: any) => ({ ...acc, [prop]: value }),
             {}
           )
-  } catch (error) {
+  } catch (error: any) {
     return { status: false, error: error.toString() }
   }
 }
