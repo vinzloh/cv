@@ -15,7 +15,7 @@ export const papaConfig = {
 export const tryParseJSON = (v: any) => {
   try {
     return JSON.parse(v)
-  } catch (error) {
+  } catch (error: any) {
     return v
   }
 }
@@ -23,7 +23,7 @@ export const tryParseJSON = (v: any) => {
 export const tryEval = (template = () => {}) => {
   try {
     return template()
-  } catch (error) {
+  } catch (error: any) {
     return error.toString()
   }
 }
