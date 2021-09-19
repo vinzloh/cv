@@ -105,9 +105,18 @@ export default function SheetRenderer(props: any) {
                             style: getStyles(key, field),
                             className: getStylesClassName(key, field),
                             ...(isImage
-                              ? { src: item, alt: stripHTML(field) }
+                              ? ({
+                                  src: item,
+                                  alt: stripHTML(field),
+                                } as React.ComponentProps<'img'>)
                               : {}),
-                            ...(isLink ? { href: item } : {}),
+                            ...(isLink
+                              ? ({
+                                  href: item,
+                                  target: '_blank',
+                                  rel: 'noopener noreferrer',
+                                } as React.ComponentProps<'a'>)
+                              : {}),
                           },
                           isImage
                             ? undefined
