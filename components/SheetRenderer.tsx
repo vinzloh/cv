@@ -77,7 +77,10 @@ export default function SheetRenderer(props: any) {
         return (
           <React.Fragment key={key}>
             {component ? (
-              <section className={getStylesClassName(key, '_container')}>
+              <section
+                className={getStylesClassName(key, '_container')}
+                style={getStyles(key, '_container') as CSSProperties}
+              >
                 {component.data.map((row, index) => (
                   <div
                     key={index}
@@ -105,9 +108,18 @@ export default function SheetRenderer(props: any) {
                             style: getStyles(key, field),
                             className: getStylesClassName(key, field),
                             ...(isImage
-                              ? { src: item, alt: stripHTML(field) }
+                              ? ({
+                                  src: item,
+                                  alt: stripHTML(field),
+                                } as React.ComponentProps<'img'>)
                               : {}),
-                            ...(isLink ? { href: item } : {}),
+                            ...(isLink
+                              ? ({
+                                  href: item,
+                                  target: '_blank',
+                                  rel: 'noopener noreferrer',
+                                } as React.ComponentProps<'a'>)
+                              : {}),
                           },
                           isImage
                             ? undefined

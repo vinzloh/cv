@@ -11,18 +11,18 @@
     "precommit": "yarn lint-eslint && lint-staged"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
+    "cheerio": "^1.0.0-rc.10",
     "lodash": "4.17.21",
-    "next": "^10.2.3",
-    "papaparse": "^5.2.5",
+    "next": "^12.0.10",
+    "papaparse": "^5.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.18",
+    "@types/cheerio": "^0.22.30",
     "@types/lodash": "^4.14.170",
     "@types/node": "^13.13.5",
-    "@types/papaparse": "^5.2.5",
+    "@types/papaparse": "^5.3.1",
     "@types/react": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
