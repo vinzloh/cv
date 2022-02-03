@@ -1,11 +1,12 @@
 import find from 'lodash/find'
+import type { ParseRemoteConfig } from 'papaparse'
 
 export const findValue = (array: [], key: string) =>
   (find(array, { key }) || ({} as any)).value
 
 export const stripHTML = (d: string) => (d || '').replace(/(<([^>]+)>)/gi, '')
 
-export const papaConfig = {
+export const papaConfig: Omit<ParseRemoteConfig, 'complete'> = {
   download: true,
   header: true,
   skipEmptyLines: true,
