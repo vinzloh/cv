@@ -6,7 +6,6 @@ import useSheet from 'hooks/useSheet'
 import find from 'lodash/find'
 import Head from 'next/head'
 import Papa from 'papaparse'
-import clsx from 'clsx'
 import React, { CSSProperties, useEffect, useState } from 'react'
 
 export default function SheetRenderer(props: any) {
@@ -79,11 +78,8 @@ export default function SheetRenderer(props: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <section
-        className={clsx(
-          'h-full w-full flex flex-col justify-center items-center',
-          getStylesClassName(page, '_container')
-        )}
+      <span
+        className={getStylesClassName(page, '_container')}
         style={getStyles(page, '_container') as CSSProperties}
       >
         {componentsLayout.map(({ component: key }: any) => {
@@ -162,7 +158,7 @@ export default function SheetRenderer(props: any) {
             </React.Fragment>
           )
         })}
-      </section>
+      </span>
     </>
   )
 }
