@@ -19,20 +19,22 @@
     "precommit": "yarn lint-eslint && lint-staged"
   },
   "dependencies": {
+    "@astrojs/react": "^2.3.2",
+    "@types/react-dom": "^18.0.6",
     "astro": "^2.10.14",
     "cheerio": "^1.0.0-rc.10",
     "lodash": "4.17.21",
     "next": "^12.1.0",
     "papaparse": "^5.3.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.30",
     "@types/lodash": "^4.14.170",
     "@types/node": "^20.5.6",
     "@types/papaparse": "^5.3.1",
-    "@types/react": "^17.0.9",
+    "@types/react": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
     "autoprefixer": "^10.2.6",
