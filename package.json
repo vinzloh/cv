@@ -2,6 +2,10 @@
   "name": "vinzloh",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=16.15 <17",
+    "pnpm": ">=8.7 <9"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
