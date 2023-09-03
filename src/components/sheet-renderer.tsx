@@ -10,13 +10,11 @@ import type { GoogleSheet, Hash } from '@/types';
 
 export type SheetRendererProps = {
   id?: string;
-  // TODO: for api?
-  layout?: any;
-  sheet?: any;
+  layout?: any; // TODO:
+  sheet?: Record<string, []>;
 };
 
 export function SheetRenderer(props: SheetRendererProps) {
-  console.log(`props:`, props);
   const { id, layout, sheet } = props;
   const [stylesheets, setStylesheets] = React.useState<Hash>({});
   const [componentsHash, setComponentsHash] = React.useState<Hash>({});
