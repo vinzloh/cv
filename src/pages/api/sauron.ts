@@ -27,7 +27,7 @@ const trolling = async (props: any) => {
             prop,
             tryParseJSON(
               tryEval(() =>
-                template(`<%= ${transform} %>`, { imports: { $ } })({
+                template(`<%= ${transform} %>`)({
                   o: page(selector),
                 }),
               ),
