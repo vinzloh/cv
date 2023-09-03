@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=16.15 <17",
+    "node": ">=18.14.1 <19",
     "pnpm": ">=8.6 <9"
   },
   "scripts": {
@@ -19,9 +19,9 @@
     "precommit": "yarn lint-eslint && lint-staged"
   },
   "dependencies": {
-    "@astrojs/react": "^2.3.2",
+    "@astrojs/react": "^3.0.0",
     "@types/react-dom": "^18.0.6",
-    "astro": "^2.10.14",
+    "astro": "^3.0.7",
     "cheerio": "^1.0.0-rc.10",
     "lodash": "4.17.21",
     "next": "^12.1.0",
@@ -32,7 +32,7 @@
   "devDependencies": {
     "@types/cheerio": "^0.22.30",
     "@types/lodash": "^4.14.170",
-    "@types/node": "^20.5.6",
+    "@types/node": "^18.14.1",
     "@types/papaparse": "^5.3.1",
     "@types/react": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
