@@ -1,0 +1,10 @@
+---
+import { Troll } from './troll';
+import Layout from '../../layouts/layout.astro';
+
+const { id } = Astro.params;
+---
+
+<Layout>
+  <Troll client:load id={id} />
+</Layout>

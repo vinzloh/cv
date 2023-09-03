@@ -10,13 +10,11 @@ import type { GoogleSheet, Hash } from '@/types';
 
 export type SheetRendererProps = {
   id?: string;
-  // TODO: for api?
-  layout?: any;
-  sheet?: any;
+  layout?: any; // TODO:
+  sheet?: Record<string, []>;
 };
 
 export function SheetRenderer(props: SheetRendererProps) {
-  console.log(`props:`, props);
   const { id, layout, sheet } = props;
   const [stylesheets, setStylesheets] = React.useState<Hash>({});
   const [componentsHash, setComponentsHash] = React.useState<Hash>({});
@@ -29,7 +27,7 @@ export function SheetRenderer(props: SheetRendererProps) {
   const getStylesClassName = (key: string, field: string) =>
     (getStyles(key, field) || ({} as any)).className;
 
-  const config = useSheet('_config').data as [];
+  const config = useSheet(id, '_config').data as [];
   const page = findValue(config, 'page');
 
   React.useEffect(() => {
