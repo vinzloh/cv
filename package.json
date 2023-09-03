@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=16.15 <17",
+    "node": ">=18.14.1 <19",
     "pnpm": ">=8.6 <9"
   },
   "scripts": {
@@ -19,20 +19,23 @@
     "precommit": "yarn lint-eslint && lint-staged"
   },
   "dependencies": {
-    "astro": "^2.10.14",
+    "@astrojs/react": "^3.0.0",
+    "@astrojs/tailwind": "^5.0.0",
+    "@types/react-dom": "^18.0.6",
+    "astro": "^3.0.7",
     "cheerio": "^1.0.0-rc.10",
     "lodash": "4.17.21",
-    "next": "^12.1.0",
+    "next": "^12.1.6",
     "papaparse": "^5.3.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.30",
     "@types/lodash": "^4.14.170",
-    "@types/node": "^20.5.6",
+    "@types/node": "^18.14.1",
     "@types/papaparse": "^5.3.1",
-    "@types/react": "^17.0.9",
+    "@types/react": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
     "autoprefixer": "^10.2.6",
@@ -43,9 +46,10 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "lint-staged": ">=10",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.3.0",
+    "postcss": "^8.4.29",
     "pre-commit": "^1.2.2",
-    "prettier": "^2.0.5",
+    "prettier": "^3.0.2",
+    "prettier-plugin-astro": "^0.12.0",
     "sass": "^1.26.5",
     "tailwindcss": "^2.1.4",
     "typescript": "^5.1.3"

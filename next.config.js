@@ -1,4 +1,7 @@
+/** @type {import('next').NextConfig} */
+
 module.exports = {
+  experimental: { reactRoot: true },
   webpack: (config, { dev }) => {
     if (dev) {
       config.module.rules.push({
