@@ -9,7 +9,15 @@ import { useBaseUrl } from '@/hooks/use-base-url';
 import { useSheet } from '@/hooks/use-sheet';
 import type { GoogleSheet, Hash } from '@/types';
 
-export function SheetRenderer(props: any) {
+export type SheetRendererProps = {
+  id?: string;
+  // TODO: for api?
+  layout?: any;
+  sheet?: any;
+};
+
+export function SheetRenderer(props: SheetRendererProps) {
+  console.log(`props:`, props);
   const { id, layout, sheet } = props;
   const [stylesheets, setStylesheets] = useState<Hash>({});
   const [componentsHash, setComponentsHash] = useState<Hash>({});
@@ -85,7 +93,6 @@ export function SheetRenderer(props: any) {
       >
         {componentsLayout.map(({ component: key }: any) => {
           const component = componentsHash[key] as GoogleSheet;
-          console.log(`component:`, component);
           return (
             <React.Fragment key={key}>
               {component ? (
