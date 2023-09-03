@@ -21,6 +21,7 @@
   "dependencies": {
     "@astrojs/react": "^3.0.0",
     "@astrojs/tailwind": "^5.0.0",
+    "@astrojs/vercel": "^4.0.3",
     "@types/react-dom": "^18.0.6",
     "astro": "^3.0.7",
     "cheerio": "^1.0.0-rc.10",

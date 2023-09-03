@@ -1,7 +1,6 @@
 import find from 'lodash/find';
-import Head from 'next/head';
 import Papa from 'papaparse';
-import React, { useEffect, useState, type CSSProperties } from 'react';
+import * as React from 'react';
 
 import { LoadingSpinner } from '@/components/loading-spinner';
 import { findValue, papaConfig, stripHTML } from '@/helpers';
@@ -19,9 +18,9 @@ export type SheetRendererProps = {
 export function SheetRenderer(props: SheetRendererProps) {
   console.log(`props:`, props);
   const { id, layout, sheet } = props;
-  const [stylesheets, setStylesheets] = useState<Hash>({});
-  const [componentsHash, setComponentsHash] = useState<Hash>({});
-  const [componentsLayout, setComponentsLayout] = useState([]);
+  const [stylesheets, setStylesheets] = React.useState<Hash>({});
+  const [componentsHash, setComponentsHash] = React.useState<Hash>({});
+  const [componentsLayout, setComponentsLayout] = React.useState([]);
   const baseUrl = useBaseUrl(id);
 
   const getStyles = (key: string, field: string) =>
@@ -33,7 +32,7 @@ export function SheetRenderer(props: SheetRendererProps) {
   const config = useSheet('_config').data as [];
   const page = findValue(config, 'page');
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!config) return;
     if (sheet && !layout) {
       const [defaultComponent] = Object.keys(sheet);
@@ -52,8 +51,7 @@ export function SheetRenderer(props: SheetRendererProps) {
     }
   }, [baseUrl, config, layout, sheet]);
 
-  useEffect(() => {
-    console.log(`componentsLayout:`, componentsLayout);
+  React.useEffect(() => {
     componentsLayout.forEach((row: any) => {
       const sheetName = row.component;
       const data = sheet?.[sheetName] as any[];
@@ -83,13 +81,10 @@ export function SheetRenderer(props: SheetRendererProps) {
 
   return (
     <>
-      <Head>
-        <title>{findValue(config, 'title') || 'O_o'}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <title slot="title">{findValue(config, 'title') || 'O_o'}</title>
       <span
         className={getStylesClassName(page, '_container')}
-        style={getStyles(page, '_container') as CSSProperties}
+        style={getStyles(page, '_container') as React.CSSProperties}
       >
         {componentsLayout.map(({ component: key }: any) => {
           const component = componentsHash[key] as GoogleSheet;
@@ -98,13 +93,13 @@ export function SheetRenderer(props: SheetRendererProps) {
               {component ? (
                 <section
                   className={getStylesClassName(key, '_container')}
-                  style={getStyles(key, '_container') as CSSProperties}
+                  style={getStyles(key, '_container') as React.CSSProperties}
                 >
                   {component.data.map((row, index) => (
                     <div
                       key={index}
                       className={getStylesClassName(key, '_row')}
-                      style={getStyles(key, '_row') as CSSProperties}
+                      style={getStyles(key, '_row') as React.CSSProperties}
                     >
                       {component.meta.fields
                         .filter((field) => !field.includes('!') && !!row[field])

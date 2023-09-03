@@ -1,10 +1,10 @@
 ---
 import { SheetRenderer } from '../../components/sheet-renderer';
+import Layout from '../../layouts/layout.astro';
+
 const { id } = Astro.params;
 ---
 
-<html>
-  <body>
-    <SheetRenderer client:load id={id} />
-  </body>
-</html>
+<Layout>
+  <SheetRenderer client:load id={id} />
+</Layout>
