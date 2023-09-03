@@ -27,7 +27,7 @@ export function SheetRenderer(props: SheetRendererProps) {
   const getStylesClassName = (key: string, field: string) =>
     (getStyles(key, field) || ({} as any)).className;
 
-  const config = useSheet('_config').data as [];
+  const config = useSheet(id, '_config').data as [];
   const page = findValue(config, 'page');
 
   React.useEffect(() => {

@@ -13,9 +13,12 @@ export const getSheet = (id: string, name: string) =>
     }),
   );
 
-export function useSheet(name: string = ''): Hash {
+export function useSheet(
+  id: string | undefined = undefined,
+  name: string = '',
+): Hash {
   const [sheet, setSheet] = React.useState({});
-  const baseUrl = useBaseUrl();
+  const baseUrl = useBaseUrl(id);
 
   React.useEffect(() => {
     if (name.length === 0) return setSheet({});
