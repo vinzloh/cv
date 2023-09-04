@@ -1,67 +1,54 @@
 {
-  "name": "vinzloh",
+  "name": "cv",
   "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=18.14.1 <19",
-    "pnpm": ">=8.6 <9"
+    "pnpm": ">=8.7.0 <9"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "stale-dep && astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "dev:next": "next dev",
-    "build:next": "next build",
-    "start:next": "next start",
-    "lint-eslint": "eslint . --ext js,jsx,ts,tsx --max-warnings=0",
-    "lint-staged": "lint-staged",
-    "precommit": "yarn lint-eslint && lint-staged"
+    "postinstall": "stale-dep -u",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@astrojs/react": "^3.0.0",
     "@astrojs/tailwind": "^5.0.0",
     "@astrojs/vercel": "^4.0.3",
-    "@types/react-dom": "^18.0.6",
     "astro": "^3.0.7",
-    "cheerio": "^1.0.0-rc.10",
+    "cheerio": "1.0.0-rc.12",
     "lodash": "4.17.21",
-    "next": "^12.1.6",
     "papaparse": "^5.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.30",
-    "@types/lodash": "^4.14.170",
+    "@types/cheerio": "^0.22.31",
+    "@types/lodash": "^4.14.197",
     "@types/node": "^18.14.1",
     "@types/papaparse": "^5.3.1",
-    "@types/react": "^18.2.21",
-    "@typescript-eslint/eslint-plugin": "^4.26.0",
-    "@typescript-eslint/parser": "^4.26.0",
-    "autoprefixer": "^10.2.6",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.28.0",
-    "eslint-loader": "^4.0.2",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "lint-staged": ">=10",
-    "npm-run-all": "^4.1.5",
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "autoprefixer": "^10.4.15",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-define-config": "^1.23.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.1",
     "postcss": "^8.4.29",
-    "pre-commit": "^1.2.2",
     "prettier": "^3.0.2",
     "prettier-plugin-astro": "^0.12.0",
-    "sass": "^1.26.5",
+    "sass": "^1.66.1",
+    "stale-dep": "^0.7.0",
     "tailwindcss": "^2.1.4",
     "typescript": "^5.1.3"
-  },
-  "browserslist": [
-    "> .5%, last 2 versions",
-    "ie >= 9"
-  ],
-  "pre-commit": "precommit",
-  "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": "prettier --write",
-    "*.{css, scss, md}": "prettier --write"
   }
 }

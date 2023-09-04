@@ -8,13 +8,10 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
 # production
 /build
 /dist
+.vercel
 
 # misc
 .DS_Store
@@ -31,3 +28,5 @@ yarn-error.log*
 .env.production.local
 
 .vscode
+
+.eslintcache
