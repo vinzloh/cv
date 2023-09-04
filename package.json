@@ -12,7 +12,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "postinstall": "stale-dep -u",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "taze": "pnpm dlx taze -r"
   },
   "dependencies": {
     "@astrojs/react": "^3.0.0",
