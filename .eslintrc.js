@@ -32,6 +32,7 @@ module.exports = defineConfig({
     {
       files: ['src/**/*.{js,jsx,ts,tsx,astro}'],
       rules: {
+        '@typescript-eslint/no-explicit-any': ['warn'],
         'react/display-name': ['error'], // don't break HMR with anonymous components
         'react-hooks/rules-of-hooks': ['error'],
         'react-hooks/exhaustive-deps': ['error'],

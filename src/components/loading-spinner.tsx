@@ -1,7 +1,7 @@
-import styles from './loading-spinner.module.scss';
+import styles from './loading-spinner.module.css';
 
 export const LoadingSpinner = () => (
   <div className={styles.loadingSpinner}>
-    <div />
+    <div className="bg-red-400" />
   </div>
 );

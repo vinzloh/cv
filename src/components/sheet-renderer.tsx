@@ -1,6 +1,7 @@
 import find from 'lodash/find';
 import Papa from 'papaparse';
 import * as React from 'react';
+import 'twind/shim';
 
 import { LoadingSpinner } from '@/components/loading-spinner';
 import { findValue, papaConfig, stripHTML } from '@/helpers';
