@@ -10,7 +10,6 @@
   height: var(--size);
   margin: 8px;
   border-radius: 50%;
-  @apply bg-red-400;
   animation: loadingSpinner 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 

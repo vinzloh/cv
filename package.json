@@ -16,14 +16,14 @@
   },
   "dependencies": {
     "@astrojs/react": "^3.0.0",
-    "@astrojs/tailwind": "^5.0.0",
     "@astrojs/vercel": "^4.0.3",
     "astro": "^3.0.7",
     "cheerio": "1.0.0-rc.12",
     "lodash": "4.17.21",
     "papaparse": "^5.3.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "twind": "^0.16.19"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.31",
@@ -46,9 +46,7 @@
     "postcss": "^8.4.29",
     "prettier": "^3.0.2",
     "prettier-plugin-astro": "^0.12.0",
-    "sass": "^1.66.1",
     "stale-dep": "^0.7.0",
-    "tailwindcss": "^2.1.4",
     "typescript": "^5.1.3"
   }
 }
