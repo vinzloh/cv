@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "jsx": "preserve",
     "jsxImportSource": "react",
-    "lib": ["dom", "dom.iterable", "esnext"],
     "paths": {
       "@/*": ["./src/*"]
     },
@@ -13,5 +13,5 @@
   },
   "exclude": ["node_modules"],
   "extends": "astro/tsconfigs/base",
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["src"]
 }
