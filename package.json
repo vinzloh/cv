@@ -11,10 +11,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "dev:next": "next dev",
     "postinstall": "stale-dep -u",
-    "build:next": "next build",
-    "start:next": "next start",
     "lint-eslint": "eslint . --ext js,jsx,ts,tsx --max-warnings=0",
     "lint-staged": "lint-staged",
     "precommit": "pnpm lint-eslint && lint-staged"
@@ -27,7 +24,6 @@
     "astro": "^3.0.7",
     "cheerio": "^1.0.0-rc.10",
     "lodash": "4.17.21",
-    "next": "^12.1.6",
     "papaparse": "^5.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

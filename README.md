@@ -15,7 +15,7 @@ https://docs.google.com/spreadsheets/d/1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ7
 - `_config` is a special sheet. the page title on the browser tab is `_config.title`
 - if `_config.page` is `main` it looks for the sheet named `main.layout`. renders the page by rows, top to bottom from the `component` column. skips first row header
 - `component` of `nav, roles, footer` match actual sheet names, holding data. **remove them all and create your own :)**
-  - for example, change `_config.page` to `intro`, it will look for sheet `intro.layout` (add it) for layout and under `components` column add `intro` so it looks for `intro` sheet (add it) for data and `intro.css` (add it) for styles. 
+  - for example, change `_config.page` to `intro`, it will look for sheet `intro.layout` (add it) for layout and under `components` column add `intro` so it looks for `intro` sheet (add it) for data and `intro.css` (add it) for styles.
 - back to `nav` sheet, rows are rendered top to bottom. skips first row header
 - `nav` data sheet matches style sheet `nav.css`:
   - `_container` and `_row` are reserved `key`column values. `_container` wraps `_row`s.
@@ -28,42 +28,20 @@ https://docs.google.com/spreadsheets/d/1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ7
 
 ### Load your own google sheet (share it as a public link)
 
-Demo: https://makeithappen.now.sh/load/1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ73eM
+Demo: https://makeithappen.vercel.app/load/1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ73eM
 
 `1qg2g3E1F1o6cIpt5E6gDh0Ctv-8btBTEY2AYoXJ73eM` is the Google Sheet ID
 
 Feel free to leave comments on what you liked, what could be better, fork it and make it your own :)
 https://twitter.com/vinzloh
 
-#### Built with Next.js + Tailwind + TypeScript + PapaParse :fire:
+#### Built with Astro + Tailwind + TypeScript + PapaParse :fire:
 
 ---
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
+$ pnpm i
+$ pnpm dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
