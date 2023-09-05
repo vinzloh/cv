@@ -80,7 +80,6 @@ export function SheetRenderer(props: SheetRendererProps) {
 
   return (
     <>
-      <title slot="title">{findValue(config, 'title') || 'O_o'}</title>
       <span
         className={getStylesClassName(page, '_container')}
         style={getStyles(page, '_container') as React.CSSProperties}
