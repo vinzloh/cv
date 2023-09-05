@@ -20,6 +20,7 @@ module.exports = defineConfig({
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:astro/recommended',
   ],
   plugins: [
     '@typescript-eslint',
@@ -30,12 +31,29 @@ module.exports = defineConfig({
   settings: { react: { version: 'detect' } },
   overrides: [
     {
-      files: ['src/**/*.{js,jsx,ts,tsx,astro}'],
+      files: ['src/**/*.{js,jsx,ts,tsx}'],
       rules: {
         '@typescript-eslint/no-explicit-any': ['warn'],
         'react/display-name': ['error'], // don't break HMR with anonymous components
         'react-hooks/rules-of-hooks': ['error'],
         'react-hooks/exhaustive-deps': ['error'],
+      },
+    },
+    // https://ota-meshi.github.io/eslint-plugin-astro/user-guide/
+    {
+      // Define the configuration for `.astro` file.
+      files: ['*.astro'],
+      // Allows Astro components to be parsed.
+      parser: 'astro-eslint-parser',
+      // Parse the script in `.astro` as TypeScript by adding the following configuration.
+      // It's the setting you need when using TypeScript.
+      parserOptions: {
+        parser: '@typescript-eslint/parser',
+        extraFileExtensions: ['.astro'],
+      },
+      rules: {
+        // override/add rules settings here, such as:
+        // "astro/no-set-html-directive": "error"
       },
     },
   ],

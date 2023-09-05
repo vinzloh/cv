@@ -7,72 +7,78 @@ import { LoadingSpinner } from '@/components/loading-spinner';
 import { findValue, papaConfig, stripHTML } from '@/helpers';
 import { useBaseUrl } from '@/hooks/use-base-url';
 import { useSheet } from '@/hooks/use-sheet';
-import type { GoogleSheet, Hash } from '@/types';
+import type { FieldValues, GoogleSheet, SheetData, SheetStyles } from '@/types';
 
 export type SheetRendererProps = {
   id?: string;
-  layout?: any; // TODO:
-  sheet?: Record<string, []>;
+  sheet?: Record<string, FieldValues[]>;
 };
 
 export function SheetRenderer(props: SheetRendererProps) {
-  const { id, layout, sheet } = props;
-  const [stylesheets, setStylesheets] = React.useState<Hash>({});
-  const [componentsHash, setComponentsHash] = React.useState<Hash>({});
-  const [componentsLayout, setComponentsLayout] = React.useState([]);
+  const { id, sheet } = props;
+  const [stylesheets, setStylesheets] = React.useState<SheetStyles>({});
+  const [componentsHash, setComponentsHash] = React.useState<SheetData>({});
+  const [componentsLayout, setComponentsLayout] = React.useState<
+    Array<{ component: string }>
+  >([]);
   const baseUrl = useBaseUrl(id);
-
   const getStyles = (key: string, field: string) =>
-    find(stylesheets[key] as [], { key: field });
+    find(stylesheets[key], { key: field });
 
   const getStylesClassName = (key: string, field: string) =>
-    (getStyles(key, field) || ({} as any)).className;
+    getStyles(key, field)?.className;
 
   const config = useSheet(id, '_config').data as [];
-  const page = findValue(config, 'page');
+  const page = findValue(config, 'page') ?? '';
 
   React.useEffect(() => {
     if (!config) return;
-    if (sheet && !layout) {
+    if (sheet) {
       const [defaultComponent] = Object.keys(sheet);
-      setComponentsLayout([{ component: defaultComponent }] as any);
+      setComponentsLayout([{ component: defaultComponent }]);
     } else {
-      const page = layout || findValue(config, 'page');
       Papa.parse(baseUrl + `${page}.layout`, {
         ...papaConfig,
-        complete: (results: any) => setComponentsLayout(results.data),
+        complete: (results) => setComponentsLayout(results.data),
       });
       Papa.parse(baseUrl + `${page}.css`, {
         ...papaConfig,
-        complete: (results: any) =>
+        complete: (results) =>
           setStylesheets((prev) => ({ ...prev, [page]: results.data })),
       });
     }
-  }, [baseUrl, config, layout, sheet]);
+  }, [baseUrl, config, sheet, page]);
 
   React.useEffect(() => {
-    componentsLayout.forEach((row: any) => {
+    componentsLayout.forEach((row) => {
       const sheetName = row.component;
-      const data = sheet?.[sheetName] as any[];
-      if (data?.length > 0) {
-        setComponentsHash((prev) => ({
-          ...prev,
-          [sheetName]: {
-            meta: { fields: Object.keys(data[0]) },
+      const data = sheet?.[sheetName];
+      if (data && data.length > 0) {
+        setComponentsHash((prev) => {
+          prev[sheetName] = {
+            meta: {
+              fields: Object.keys(data[0]),
+            },
             data,
-          } as GoogleSheet,
-        }));
+            errors: [],
+          };
+          return prev;
+        });
       } else {
         Papa.parse(baseUrl + sheetName, {
           ...papaConfig,
-          complete: (results) =>
-            setComponentsHash((prev) => ({ ...prev, [sheetName]: results })),
+          complete: (results) => {
+            setComponentsHash((prev) => {
+              prev[sheetName] = results as GoogleSheet;
+              return prev;
+            });
+          },
         });
       }
 
       Papa.parse(baseUrl + `${sheetName}.css`, {
         ...papaConfig,
-        complete: (results: any) =>
+        complete: (results) =>
           setStylesheets((prev) => ({ ...prev, [sheetName]: results.data })),
       });
     });
@@ -80,13 +86,12 @@ export function SheetRenderer(props: SheetRendererProps) {
 
   return (
     <>
-      <title slot="title">{findValue(config, 'title') || 'O_o'}</title>
       <span
         className={getStylesClassName(page, '_container')}
         style={getStyles(page, '_container') as React.CSSProperties}
       >
-        {componentsLayout.map(({ component: key }: any) => {
-          const component = componentsHash[key] as GoogleSheet;
+        {componentsLayout.map(({ component: key }) => {
+          const component = componentsHash[key];
           return (
             <React.Fragment key={key}>
               {component ? (
@@ -105,7 +110,7 @@ export function SheetRenderer(props: SheetRendererProps) {
                         .map((field, i) => {
                           const item = `${row[field]}`;
                           const allowHTML = ['img', 'a'];
-                          const fieldMatch: any = field.match(/<([a-z]+)>/);
+                          const fieldMatch = field.match(/<([a-z]+)>/);
                           const hasHTML =
                             fieldMatch && allowHTML.includes(fieldMatch[1]);
                           const isImage =
@@ -138,7 +143,7 @@ export function SheetRenderer(props: SheetRendererProps) {
                               ? undefined
                               : (isLink && stripHTML(field)) ||
                                   (isMultiLine &&
-                                    item.split('\n\n').map((p: any, i: any) => (
+                                    item.split('\n\n').map((p, i) => (
                                       <div
                                         key={i}
                                         className={getStylesClassName(

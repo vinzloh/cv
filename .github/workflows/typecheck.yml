@@ -1,0 +1,39 @@
+# https://dev.to/typescripttv/getting-started-with-github-actions-and-workflows-2ki2
+
+name: 'sanity-check'
+
+on:
+  pull_request:
+  push:
+    branches: ['main', 'develop']
+
+jobs:
+  typecheck:
+    # Using a build matrix to route workflow to hosted runner(s)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['ubuntu-latest']
+        node-version: ['18.x']
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3
+
+      - name: 'Use Node.js v${{ matrix.node-version }}'
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: 'Setup pnpm'
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: 'pnpm install'
+        run: pnpm i
+
+      - name: 'pnpm lint'
+        run: pnpm lint
+
+      - name: 'pnpm typecheck'
+        run: pnpm typecheck

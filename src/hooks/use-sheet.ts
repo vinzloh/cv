@@ -3,20 +3,20 @@ import * as React from 'react';
 
 import { papaConfig } from '@/helpers';
 import { getBaseUrl, useBaseUrl } from '@/hooks/use-base-url';
-import type { GoogleSheet, Hash } from '@/types';
+import type { GoogleSheet, SheetStyles } from '@/types';
 
 export const getSheet = (id: string, name: string) =>
   new Promise<GoogleSheet>((resolve) =>
     Papa.parse<GoogleSheet>(getBaseUrl(id) + name, {
       ...papaConfig,
-      complete: (res: any) => resolve(res),
+      complete: (res) => resolve(res as unknown as GoogleSheet),
     }),
   );
 
 export function useSheet(
   id: string | undefined = undefined,
   name: string = '',
-): Hash {
+): SheetStyles {
   const [sheet, setSheet] = React.useState({});
   const baseUrl = useBaseUrl(id);
 

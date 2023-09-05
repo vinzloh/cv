@@ -10,20 +10,26 @@ export const POST: APIRoute = async (props) => {
   return new Response(JSON.stringify(responseJson));
 };
 
-const trolling = async (props: any) => {
+const trolling = async (props: {
+  url: string;
+  trolls: Array<{
+    prop: string;
+    selector: string;
+    transform: string;
+  }>;
+}) => {
   try {
     const { url, trolls = [] } = props;
     const body = await (await fetch(url)).text();
-    const page = $.load(body as any, { xmlMode: body.includes('<?xml') });
-
+    const page = $.load(body, { xmlMode: body.includes('<?xml') });
     return trolls.length === 0
       ? {
           status: false,
           error: 'Missing trolls',
         }
       : trolls
-          .filter(({ prop }: any) => !prop.includes('!'))
-          .map(({ prop, selector, transform }: any) => [
+          .filter(({ prop }) => !prop.includes('!'))
+          .map(({ prop, selector, transform }) => [
             prop,
             tryParseJSON(
               tryEval(() =>
@@ -33,11 +39,8 @@ const trolling = async (props: any) => {
               ),
             ),
           ])
-          .reduce(
-            (acc: any, [prop, value]: any) => ({ ...acc, [prop]: value }),
-            {},
-          );
-  } catch (error: any) {
-    return { status: false, error: error.toString() };
+          .reduce((acc, [prop, value]) => ({ ...acc, [prop]: value }), {});
+  } catch (error) {
+    return { status: false, error: (error as Error).toString() };
   }
 };
