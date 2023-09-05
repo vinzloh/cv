@@ -4,11 +4,11 @@ import { LoadingSpinner } from '@/components/loading-spinner';
 import { SheetRenderer } from '@/components/sheet-renderer';
 import { findValue } from '@/helpers';
 import { getSheet } from '@/hooks/use-sheet';
-import type { GoogleSheet } from '@/types';
+import type { FieldValues, GoogleSheet } from '@/types';
 
-interface Task {
+interface Task extends FieldValues {
   url: string;
-  transforms: string | [];
+  transforms: string;
   layout: string;
 }
 
@@ -28,18 +28,17 @@ export function Troll({ id }: TrollProps) {
     if (!id) return;
 
     const setPageStyle = (res: GoogleSheet) => {
-      setPageClassName(findValue(res.data as [], 'className'));
+      setPageClassName(findValue(res.data, 'className') ?? '');
       return res;
     };
 
     const getTasksSheetName = (res: GoogleSheet) =>
-      findValue(res.data as [], 'tasks');
+      findValue(res.data as [], 'tasks') ?? '';
 
     const getTasks = (taskSheetName: string) => getSheet(id, taskSheetName);
     const toTaskArray = (res: GoogleSheet) => res.data as Task[];
 
-    const getTaskTransforms = (task: Task) =>
-      getSheet(id, task.transforms as string);
+    const getTaskTransforms = (task: Task) => getSheet(id, task.transforms);
 
     const fetchData = (task: Task) => (res: GoogleSheet) =>
       fetch(`/api/sauron`, {
