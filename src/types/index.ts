@@ -1,8 +1,8 @@
-export interface Hash<T = {}> {
-  [key: string]: T
+export interface Hash<T = object> {
+  [key: string]: T;
 }
 
 export interface GoogleSheet {
-  meta: { fields: string[] }
-  data: any[]
+  meta: { fields: string[] };
+  data: any[];
 }
