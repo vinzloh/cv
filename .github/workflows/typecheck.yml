@@ -1,6 +1,6 @@
 # https://dev.to/typescripttv/getting-started-with-github-actions-and-workflows-2ki2
 
-name: 'typecheck'
+name: 'sanity-check'
 
 on:
   pull_request:
@@ -29,5 +29,11 @@ jobs:
         with:
           version: 8
 
-      - name: 'Run typecheck'
-        run: pnpm i && pnpm typecheck
+      - name: 'pnpm install'
+        run: pnpm i
+
+      - name: 'pnpm lint'
+        run: pnpm lint
+
+      - name: 'pnpm typecheck'
+        run: pnpm typecheck
