@@ -30,4 +30,4 @@ jobs:
           version: 8
 
       - name: 'Run typecheck'
-        run: pnpm install && pnpm typecheck
+        run: pnpm i && pnpm typecheck
