@@ -13,7 +13,8 @@
     "preview": "astro preview",
     "postinstall": "stale-dep -u",
     "prepare": "husky install",
-    "taze": "pnpm dlx taze -r"
+    "taze": "pnpm dlx taze -r",
+    "typecheck": "stale-dep && tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@astrojs/react": "^3.0.0",
