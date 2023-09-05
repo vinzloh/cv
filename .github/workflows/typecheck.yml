@@ -1,17 +1,13 @@
 # https://dev.to/typescripttv/getting-started-with-github-actions-and-workflows-2ki2
 
-# Name of our workflow
 name: 'typecheck'
 
-# Events that will trigger our workflow
 on:
   pull_request:
   push:
     branches: ['main', 'develop']
 
-# List of custom jobs
 jobs:
-  # Job name
   typecheck:
     # Using a build matrix to route workflow to hosted runner(s)
     runs-on: ${{ matrix.os }}
@@ -23,16 +19,15 @@ jobs:
       - name: 'Checkout repository'
         uses: actions/checkout@v3
 
-      - name: 'Setup pnpm'
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      # Uses specific version of Node.js
       - name: 'Use Node.js v${{ matrix.node-version }}'
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: 'Setup pnpm'
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
       - name: 'Run typecheck'
         run: pnpm install && pnpm typecheck
