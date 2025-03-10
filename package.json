@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=18.14.1 <19",
-    "pnpm": ">=8.7.0 <9"
+    "node": "^20",
+    "pnpm": "^9.5.0"
   },
+  "packageManager": "pnpm@9.5.0",
   "scripts": {
     "dev": "stale-dep && astro dev",
     "start": "astro dev",
