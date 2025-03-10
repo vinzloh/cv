@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import $ from 'cheerio';
+import * as $ from 'cheerio';
 import template from 'lodash/template';
 
 import { tryEval, tryParseJSON } from '@/helpers';
