@@ -73,8 +73,8 @@ importers:
         specifier: ^9.0.0
         version: 9.0.0(eslint@8.57.1)
       eslint-define-config:
-        specifier: ^1.23.0
-        version: 1.23.0
+        specifier: ^2.1.0
+        version: 2.1.0
       eslint-plugin-astro:
         specifier: ^1.3.1
         version: 1.3.1(eslint@8.57.1)
@@ -1377,9 +1377,10 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-define-config@1.23.0:
-    resolution: {integrity: sha512-4mMyu0JuBkQHsCtR+42irIQdFLmLIW+pMAVcyOV/gZRL4O1R8iuH0eMG3oL3Cbi1eo9fDAfT5CIHVHgdyxcf6w==}
-    engines: {node: ^16.13.0 || >=18.0.0, npm: '>=7.0.0', pnpm: '>= 8.6.0'}
+  eslint-define-config@2.1.0:
+    resolution: {integrity: sha512-QUp6pM9pjKEVannNAbSJNeRuYwW3LshejfyBBpjeMGaJjaDUpVps4C6KVR8R7dWZnD3i0synmrE36znjTkJvdQ==}
+    engines: {node: '>=18.0.0', npm: '>=9.0.0', pnpm: '>=8.6.0'}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   eslint-import-resolver-node@0.3.9:
     resolution: {integrity: sha512-WFj2isz22JahUv+B788TlO3N6zL3nNJGU8CcZbPZvVEkBPaJdCV4vy5wyghty5ROFbCRnm132v8BScu5/1BQ8g==}
@@ -4630,7 +4631,7 @@ snapshots:
     dependencies:
       eslint: 8.57.1
 
-  eslint-define-config@1.23.0: {}
+  eslint-define-config@2.1.0: {}
 
   eslint-import-resolver-node@0.3.9:
     dependencies:
