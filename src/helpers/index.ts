@@ -18,7 +18,7 @@ export const papaConfig: Omit<ParseRemoteConfig, 'complete'> = {
 export const tryParseJSON = (v: string) => {
   try {
     return JSON.parse(v);
-  } catch (error) {
+  } catch {
     return v;
   }
 };
