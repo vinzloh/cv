@@ -63,3 +63,10 @@ jobs:
 
       - name: Typecheck
         run: pnpm typecheck
+  checks-passed:
+    name: Checks Passed or Skipped
+    needs: lint
+    if: (!cancelled() && !failure())
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Checks Passed or Skipped"
