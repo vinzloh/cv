@@ -30,6 +30,7 @@
     "twind": "^0.16.19"
   },
   "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "@types/cheerio": "^0.22.31",
     "@types/lodash": "^4.14.197",
     "@types/node": "^20.17.24",
